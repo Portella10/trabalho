@@ -10,10 +10,9 @@ const CastMember = () => {
   useEffect(() => {
     const fetchCastMember = async () => {
       try {
-        const response = await fetch(`https://api.tvmaze.com/shows/${id}/cast`);
+        const response = await fetch(`https://api.tvmaze.com/shows/${id}/cast`)
         const data = await response.json();
-        // Aqui você pode escolher um membro do elenco
-        const famousMember = data[0]; // Pega o primeiro membro do elenco como exemplo
+        const famousMember = data.cast[0]; // Pega o primeiro membro do elenco como exemplo
         setMember(famousMember);
         setLoading(false);
       } catch (error) {
@@ -32,11 +31,15 @@ const CastMember = () => {
   return (
     <div className="cast-member">
       <h2>Elenco Famoso</h2>
-      <h3>{member.person.name}</h3>
-      <img src={member.person.image?.medium} alt={member.person.name} />
-      <p>{member.person.country ? `País: ${member.person.country.name}` : "País desconhecido"}</p>
-      <p>{member.person.birthday ? `Nascimento: ${member.person.birthday}` : "Data de nascimento desconhecida"}</p>
-      <p>{member.person.bio || "Biografia não disponível."}</p>
+      {member ? (
+        <>
+          <h3>{member.name}</h3>
+          <img src={`https://image.tmdb.org/t/p/w500${member.profile_path}`} alt={member.name} />
+          <p>{member.character ? `Personagem: ${member.character}` : "Personagem não disponível"}</p>
+        </>
+      ) : (
+        <p>Elenco não disponível.</p>
+      )}
     </div>
   );
 };
