@@ -1,7 +1,6 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Home from './components/Home';
 import SeriesDetails from './pages/SeriesDetails';
 import CastMember from './pages/CastMember';
 import ProductionCompany from './pages/ProductionCompany';
