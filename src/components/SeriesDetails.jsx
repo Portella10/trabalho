@@ -1,31 +1,49 @@
-// src/components/SeriesDetails.jsx
+// src/pages/SeriesDetails.js
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
-const API_KEY = 'YOUR_TMDB_API_KEY'; // Substitua pelo seu API Key do TMDB
+import { useParams, Link } from 'react-router-dom';
 
 const SeriesDetails = () => {
   const { id } = useParams();
   const [serie, setSerie] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSeriesDetails = async () => {
-      const response = await axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=pt-BR`);
-      setSerie(response.data);
+    const fetchSeries = async () => {
+      try {
+        const response = await fetch(`https://api.tvmaze.com/shows/${id}`);
+        const data = await response.json();
+        setSerie(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+        setLoading(false);
+      }
     };
-    fetchSeriesDetails();
+
+    fetchSeries();
   }, [id]);
 
-  if (!serie) return <div>Carregando...</div>;
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
 
   return (
-    <div>
-      <h2>{serie.name}</h2>
-      <img src={`https://image.tmdb.org/t/p/w500${serie.poster_path}`} alt={serie.name} />
-      <p>{serie.overview}</p>
-      <h4>Avaliação: {serie.vote_average}</h4>
-      <h4>Lançamento: {serie.first_air_date}</h4>
+    <div className="series-details">
+      <h1>{serie.name}</h1>
+      <img src={serie.image?.original} alt={serie.name} />
+      <div className="summary" dangerouslySetInnerHTML={{ __html: serie.summary }} />
+      <Link to={`/cast-member/${id}`}>
+        <button>Ver Elenco Famoso</button>
+      </Link>
+      <Link to={`/production-company/${id}`}>
+        <button>Ver Produtora</button>
+      </Link>
+      <Link to={`/cast-member/${id}`}>
+  <button>Ver Elenco Famoso</button>
+</Link>
+<Link to={`/production-company/${id}`}>
+  <button>Ver Produtora</button>
+</Link>
     </div>
   );
 };
