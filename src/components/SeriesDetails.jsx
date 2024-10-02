@@ -1,26 +1,25 @@
-// src/pages/SeriesDetails.js
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const SeriesDetails = () => {
   const { id } = useParams();
-  const [serie, setSerie] = useState(null);
+  const [series, setSeries] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSeries = async () => {
+    const fetchSeriesDetails = async () => {
       try {
         const response = await fetch(`https://api.tvmaze.com/shows/${id}`);
         const data = await response.json();
-        setSerie(data);
+        setSeries(data);
         setLoading(false);
       } catch (error) {
-        console.error('Erro ao buscar dados:', error);
+        console.error('Erro ao buscar detalhes da série:', error);
         setLoading(false);
       }
     };
 
-    fetchSeries();
+    fetchSeriesDetails();
   }, [id]);
 
   if (loading) {
@@ -29,21 +28,12 @@ const SeriesDetails = () => {
 
   return (
     <div className="series-details">
-      <h1>{serie.name}</h1>
-      <img src={serie.image?.original} alt={serie.name} />
-      <div className="summary" dangerouslySetInnerHTML={{ __html: serie.summary }} />
-      <Link to={`/cast-member/${id}`}>
-        <button>Ver Elenco Famoso</button>
-      </Link>
-      <Link to={`/production-company/${id}`}>
-        <button>Ver Produtora</button>
-      </Link>
-      <Link to={`/cast-member/${id}`}>
-  <button>Ver Elenco Famoso</button>
-</Link>
-<Link to={`/production-company/${id}`}>
-  <button>Ver Produtora</button>
-</Link>
+      <h2>{series.name}</h2>
+      <img src={series.image?.original} alt={series.name} />
+      <p>{series.summary}</p>
+      <p><strong>Gêneros:</strong> {series.genres.join(', ')}</p>
+      <p><strong>Ano de Lançamento:</strong> {series.premiered}</p>
+      <p><strong>Classificação:</strong> {series.rating.average}</p>
     </div>
   );
 };
