@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_KEY = 'YOUR_TMDB_API_KEY'; // Substitua pelo seu API Key do TMDB
+const API_KEY = 'https://api.tvmaze.com/shows'; // Substitua pelo seu API Key do TMDB
 const API_URL = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=pt-BR`;
 
 const Home = () => {
@@ -29,6 +29,12 @@ const Home = () => {
                 alt={serie.name}
               />
               <h3>{serie.name}</h3>
+            </Link>
+            <Link to={`/cast-member/${serie.id}`}>
+              <button>Ver Elenco Famoso</button>
+            </Link>
+            <Link to={`/production-company/${serie.id}`}>
+              <button>Ver Produtora</button>
             </Link>
           </div>
         ))}
