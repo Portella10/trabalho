@@ -1,4 +1,3 @@
-// src/pages/ProductionCompany.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
