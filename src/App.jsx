@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Home from './components/Home';
-import SeriesDetails from './pages/SeriesDetails';
-import CastMember from './pages/CastMember';
-import ProductionCompany from './pages/ProductionCompany';
-import About from './pages/About';
+import SeriesDetails from './components/SeriesDetails';
+import CastMember from './components/CastMember';
+import ProductionCompany from './components/ProductionCompany';
+import About from './components/About';
 
 function App() {
   return (
