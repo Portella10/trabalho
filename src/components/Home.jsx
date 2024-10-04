@@ -1,9 +1,9 @@
-// src/components/Home.jsx
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_KEY = 'https://api.tvmaze.com/shows'; // Substitua pelo seu API Key do TMDB
+const API_KEY = 'https://api.tvmaze.com/shows'; 
 const API_URL = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=pt-BR`;
 
 const Home = () => {
