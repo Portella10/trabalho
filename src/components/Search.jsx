@@ -1,9 +1,9 @@
-// src/components/Search.jsx
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_KEY = 'YOUR_TMDB_API_KEY'; // Substitua pelo seu API Key do TMDB
+const API_KEY = 'YOUR_TMDB_API_KEY'; 
 
 const Search = () => {
   const [query, setQuery] = useState('');
