@@ -1,4 +1,4 @@
-// src/pages/CastMember.js
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const CastMember = () => {
       try {
         const response = await fetch(`https://api.tvmaze.com/shows/${id}/cast`)
         const data = await response.json();
-        const famousMember = data.cast[0]; // Pega o primeiro membro do elenco como exemplo
+        const famousMember = data.cast[0]; // Pega o primeiro membro do elenco
         setMember(famousMember);
         setLoading(false);
       } catch (error) {
